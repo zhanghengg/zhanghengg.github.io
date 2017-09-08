@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    
+
+    <title>
+      JavaScript原型链的理解 | 你好，这里是张衡的前端博客 
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+      <meta name="author" content="张衡">
+    
+    
+
+    <meta name="description" content="什么是继承 继承指的是子类可以拥有父类的属性和方法，同时子类可以在父类的基础上有自己的属性和方法，并且子类可以覆盖父类的属性和方法。继承分为接口继承以及实现继承，由于JavaScript函数没有签名，在ECMAScript中无法实现接口继承。ECMAScript只支持实现继承，而且其实现继承主要是依靠原型链来实现的。  1.原型   我们创建的每个函数都有一个prototype属性，这个属性是一个">
+<meta name="keywords" content="JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript原型链的理解 | 你好，这里是张衡的前端博客">
+<meta property="og:url" content="http://yoursite.com/2017/02/06/JavaScript原型链的理解/index.html">
+<meta property="og:site_name" content="你好，这里是张衡的前端博客">
+<meta property="og:description" content="什么是继承 继承指的是子类可以拥有父类的属性和方法，同时子类可以在父类的基础上有自己的属性和方法，并且子类可以覆盖父类的属性和方法。继承分为接口继承以及实现继承，由于JavaScript函数没有签名，在ECMAScript中无法实现接口继承。ECMAScript只支持实现继承，而且其实现继承主要是依靠原型链来实现的。  1.原型   我们创建的每个函数都有一个prototype属性，这个属性是一个">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="http://ovmype6lo.bkt.clouddn.com/yxl.jpg">
+<meta property="og:updated_time" content="2017-09-08T05:58:10.575Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript原型链的理解 | 你好，这里是张衡的前端博客">
+<meta name="twitter:description" content="什么是继承 继承指的是子类可以拥有父类的属性和方法，同时子类可以在父类的基础上有自己的属性和方法，并且子类可以覆盖父类的属性和方法。继承分为接口继承以及实现继承，由于JavaScript函数没有签名，在ECMAScript中无法实现接口继承。ECMAScript只支持实现继承，而且其实现继承主要是依靠原型链来实现的。  1.原型   我们创建的每个函数都有一个prototype属性，这个属性是一个">
+<meta name="twitter:image" content="http://ovmype6lo.bkt.clouddn.com/yxl.jpg">
+    
+    
+    
+      <link rel="icon" type="image/x-icon" href="/favicon.png">
+    
+    <link rel="stylesheet" href="/css/uno.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/archive.css">
+    <link rel="stylesheet" href="/css/china-social-icon.css">
+
+</head>
+<body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+
+<header class="panel-cover panel-cover--collapsed">
+
+
+  <div class="panel-main">
+
+  
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        
+
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">你好，这里是张衡的前端博客</a></h1>
+        <hr class="panel-cover__divider" />
+
+        
+        <p class="panel-cover__description">
+          Welcome to zhero&#39;s Blog
+        </p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+        
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+
+              
+                
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">文章</a></li>
+              
+                
+                <li class="navigation__item"><a href="/archive" title="" class="">归档</a></li>
+              
+                
+                <li class="navigation__item"><a href="http://139.199.227.98" title="" class="">主页</a></li>
+              
+
+            </ul>
+          </nav>
+
+          <!-- ----------------------------
+To add a new social icon simply duplicate one of the list items from below
+and change the class in the <i> tag to match the desired social network
+and then add your link to the <a>. Here is a full list of social network
+classes that you can use:
+
+    icon-social-500px
+    icon-social-behance
+    icon-social-delicious
+    icon-social-designer-news
+    icon-social-deviant-art
+    icon-social-digg
+    icon-social-dribbble
+    icon-social-facebook
+    icon-social-flickr
+    icon-social-forrst
+    icon-social-foursquare
+    icon-social-github
+    icon-social-google-plus
+    icon-social-hi5
+    icon-social-instagram
+    icon-social-lastfm
+    icon-social-linkedin
+    icon-social-medium
+    icon-social-myspace
+    icon-social-path
+    icon-social-pinterest
+    icon-social-rdio
+    icon-social-reddit
+    icon-social-skype
+    icon-social-spotify
+    icon-social-stack-overflow
+    icon-social-steam
+    icon-social-stumbleupon
+    icon-social-treehouse
+    icon-social-tumblr
+    icon-social-twitter
+    icon-social-vimeo
+    icon-social-xbox
+    icon-social-yelp
+    icon-social-youtube
+    icon-social-zerply
+    icon-mail
+
+-------------------------------->
+
+<!-- add social info here -->
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner entry">
+            
+
+<article class="post-container post-container--single">
+
+  <header class="post-header">
+    
+    <h1 class="post-title">JavaScript原型链的理解</h1>
+
+    
+
+    <div class="post-meta">
+      <time datetime="2017-02-06" class="post-meta__date date">2017-02-06</time> 
+
+      <span class="post-meta__tags tags">
+
+          
+
+          
+             &#8226; 标签:
+            <font class="tags">
+              <a class="tags-link" href="/tags/JavaScript/">JavaScript</a>
+            </font>
+          
+
+      </span>
+    </div>
+    
+    
+
+  </header>
+
+  <section id="post-content" class="article-content post">
+    <h1 id="什么是继承"><a href="#什么是继承" class="headerlink" title="什么是继承"></a>什么是继承</h1><blockquote>
+<p>继承指的是子类可以拥有父类的属性和方法，同时子类可以在父类的基础上有自己的属性和方法，并且子类可以覆盖父类的属性和方法。<br>继承分为接口继承以及实现继承，由于JavaScript函数没有签名，在ECMAScript中无法实现接口继承。ECMAScript只支持实现继承，而且其实现继承主要是依靠原型链来实现的。</p>
+</blockquote>
+<h2 id="1-原型"><a href="#1-原型" class="headerlink" title="1.原型"></a>1.原型</h2><p><img src="http://ovmype6lo.bkt.clouddn.com/yxl.jpg" alt="ddd">  </p>
+<p>我们创建的每个函数都有一个prototype属性，这个属性是一个指针，指向一个对象，而这个对象的用途是包含可以由特定类型的所有实例共享的属性和方法。一般编程的时候，将每个实例的私有属性放在构造函数中生成，而公有属性以及方法在原型上定义，由所有实例共享。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">function Person(name,age)&#123;</div><div class="line">    this.name = name;</div><div class="line">    this.age = age;</div><div class="line">&#125;</div><div class="line">Person.prototype.sayHello = function()&#123;</div><div class="line">    console.log(&apos;hello,my name is &apos; + name + &apos;,my age is &apos; + age);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>上面就是构造函数方法与原型构造法结合使用，这样实例都有各自的name和age属性，都共享sayHello这个方法。</p>
+<h2 id="2-继承"><a href="#2-继承" class="headerlink" title="2.继承"></a>2.继承</h2><h3 id="2-1原型链继承"><a href="#2-1原型链继承" class="headerlink" title="2.1原型链继承"></a>2.1原型链继承</h3><p>通过<strong>原型链</strong>可以实现类与类之间的继承，实现原型链有一种基本模式，代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">function SuperType()&#123;</div><div class="line">    this.property = true;</div><div class="line">&#125;</div><div class="line">SuperType.prototype.getSuperValue = function()&#123;</div><div class="line">    return this.property;</div><div class="line">&#125;</div><div class="line">function SubType()&#123;</div><div class="line">    this.subproperty = false;</div><div class="line">&#125;</div><div class="line">//继承了SuperType</div><div class="line">SubType.prototype = new SuperType();</div><div class="line">SubType.prototype.getSubValue = function()&#123;</div><div class="line">    return this.subproperty;</div><div class="line">&#125;;</div><div class="line">var instance = new SubType();</div><div class="line">alert(instance.getSuperValue());//true</div></pre></td></tr></table></figure>
+<p>上面代码通过创建SuperType的实例，并将该实例赋给SubType.prototype实现了类之间的继承，但是由于原型中包含引用值带来了一个问题，某个实例对引用值的修改会影响到其他实例，所以实际开发中很少会单独使用原型链。</p>
+<h3 id="2-2借用构造函数"><a href="#2-2借用构造函数" class="headerlink" title="2.2借用构造函数"></a>2.2借用构造函数</h3><p>借用构造函数构造函数，通过apply()或者call()在子类的构造函数中调用父类的解决了原型中包含引用类型值带来的问题。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">function SuperType()&#123;</div><div class="line">    this.colors = [&apos;red&apos;,&apos;blue&apos;,&apos;green&apos;]</div><div class="line">&#125;</div><div class="line">function SubType()&#123;</div><div class="line">    //继承了SuperType</div><div class="line">    SuperType.call(this);</div><div class="line">&#125;</div><div class="line">var instance1 = new SubType();</div><div class="line">instance1.colors.push(&apos;black&apos;);</div><div class="line">alert(intance1.colors); //&apos;red,blue,green.black&apos;</div><div class="line"></div><div class="line">var instance2 = new SubType();</div><div class="line">alert(instance.colors);  //&apos;red,blue,green&apos;</div></pre></td></tr></table></figure></p>
+<p>对于原型链而言，借用构造函数有一个优点，可以在子类构造函数中向父类构造函数传递参数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">function SuperType(name)&#123;</div><div class="line">    this.name = name;</div><div class="line">&#125;</div><div class="line">function SubType()&#123;</div><div class="line">    //继承了SupeType，同时嗨传递了参数</div><div class="line">    SuperType.call(this,&apos;Nucholas&apos;);</div><div class="line">    this.age = 29;</div><div class="line">&#125;</div><div class="line">var instance =new SubType();</div><div class="line">alert(instance.name);  //&apos;Nicholas&apos;;</div><div class="line">alert(instance.age);   //29</div></pre></td></tr></table></figure></p>
+<p>但是借用构造函数有一个问题就是方法都是再构造函数中定义的，函数的复用就无从提起了。</p>
+<h3 id="2-3组合继承"><a href="#2-3组合继承" class="headerlink" title="2.3组合继承"></a>2.3组合继承</h3><p>结合原型链继承和构造函数继承，使用原型链对原型属性和方法进行继承，使用借用构造函数对实例属性进行继承。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">function SuperType(name)&#123;</div><div class="line">    this.name = name;</div><div class="line">    this.colors = [&apos;red&apos;,&apos;blue&apos;,&apos;green&apos;];</div><div class="line">&#125;</div><div class="line">SuperType.prototype.sayName = function()&#123;</div><div class="line">    alert(this.name);</div><div class="line">&#125;</div><div class="line">function SubType(name,age)&#123;</div><div class="line">    //继承属性</div><div class="line">    SuperType.call(this,name);</div><div class="line">    this.age = age;</div><div class="line">&#125;</div><div class="line">//继承方法</div><div class="line">SubType.prototype = new SuperType();</div><div class="line">SubType.prototype.constructor = SubType;</div><div class="line">SubType.prototype.sayAge = function()&#123;</div><div class="line">    alert(this.age);</div><div class="line">&#125;;</div><div class="line">var instance1 = new SubType(&apos;Nicholas&apos;,29);</div><div class="line">instance1.colors.push(&apos;black&apos;);</div><div class="line">alert(instance1.colors);  //&apos;red,blue,green,black&apos;</div><div class="line">instance1.sayName();    //&apos;Nicholas&apos;;</div><div class="line">instance1.sayAge();   //29</div><div class="line"></div><div class="line">var instance2 = new SubType(&apos;Greg&apos;,27);</div><div class="line">alert(instance2.colors);  //&apos;red,blue,green&apos;</div><div class="line">instance2.sayName();    //&apos;Greg&apos;</div><div class="line">instance2.sayAge();    //27</div></pre></td></tr></table></figure>
+<h3 id="2-4原型式继承"><a href="#2-4原型式继承" class="headerlink" title="2.4原型式继承"></a>2.4原型式继承</h3><p>这个方法没有严格意义上的构造函数，是借助已有对象为为原型创建新的对象，同时不必因此创建自定义类型。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">var person = &#123;</div><div class="line">    name:&apos;Nicholas&apos;,</div><div class="line">    friends:[&apos;Shelby&apos;,&apos;zhangheng&apos;,&apos;lqj&apos;,&apos;jonathen&apos;]</div><div class="line">&#125;;</div><div class="line">var antherPerson1 = Object.create(person);</div><div class="line">antherPerson1.name = &apos;Greg&apos;;</div><div class="line">antherPerson1.friends.push(&apos;Rob&apos;);</div><div class="line"></div><div class="line">var antherPerson2 = Object.create(person);</div><div class="line">antherPerson2.name = &apos;joy&apos;;</div><div class="line">antherPerson2.friends.push(&apos;lili&apos;);</div><div class="line"></div><div class="line">alert(person.friends);  //&apos;Shelby,zhangheng,lqj,jonathen,Rob,lili&apos;</div></pre></td></tr></table></figure>
+<p>Object.create(person)执行的操作是创建一个空的对象，并将这个空对象的prototype指向person，也就是说将person作为这个空对象的原型。<br>原型式适用于<strong>没有必要特地创建一个类型，只想让一个对象与另一个对象保持类似</strong>的情况，需要记住的是，包含引用类型值的属性始终会共享相应的值，这点跟原型链继承是一样的。</p>
+<h3 id="2-5寄生式继承"><a href="#2-5寄生式继承" class="headerlink" title="2.5寄生式继承"></a>2.5寄生式继承</h3><p>类似于封装了创建过程的工厂模式。与原型式继承紧密相关，寄生构造函数接收一个基础对象，在函数内部根据这个对象返回一个新对象，接着对这个对象进行增强，在寄生构造函数的最后把这个对象返回。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">function createAnother(obj)&#123;</div><div class="line">    var clone = Object.create(obj);  //这里不一定是需要Object.create()，只要能够返回一个新对象即可。</div><div class="line">    clone.sayHi = function()&#123;  //以某种方式增强这个对象</div><div class="line">        alert(&apos;hi&apos;);</div><div class="line">    &#125;</div><div class="line">    return clone;   //在最后返回这个对象</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="2-6寄生组合继承"><a href="#2-6寄生组合继承" class="headerlink" title="2.6寄生组合继承"></a>2.6寄生组合继承</h3><p>组合继承中存在一个问题，就是在继承的时候调用了两次父类的构造函数，第一次在原型的继承上，第二次在子类的构造函数中被调用，这样，原型上有所有的属性和方法，而子类的实例中也包含了借用父类构造函数所创建的属性，实例中的属性将原型中的属性覆盖，所以原型中的属性是不必要的。<br>寄生组合继承解决了这个问题：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">function inheritPrototype(subType,superType)&#123;</div><div class="line">    var prototype = Object.create(superType.prototype);</div><div class="line">    prototype.constructor = subType;</div><div class="line">    subType.prototype = prototype;</div><div class="line">&#125;</div><div class="line">functuin SuperType(name)&#123;</div><div class="line">    this.name = name;</div><div class="line">    this.colors = [&apos;red&apos;,&apos;blue&apos;,&apos;green&apos;];</div><div class="line">&#125;</div><div class="line">SuperType.prototype.sayName = function()&#123;</div><div class="line">    alert(this.name);</div><div class="line">&#125;</div><div class="line">function SubType(name,age)&#123;</div><div class="line">    SuperType.call(this,name);</div><div class="line">    this.age = age;</div><div class="line">&#125;</div><div class="line">inheritProtoype(SubType,SuperType);</div><div class="line"></div><div class="line">SubType.prototype.sayAge = function()&#123;</div><div class="line">    alert(this.age);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这样，在构造函数中通过call()或apply()调用父类的构造函数实现了实例上的属性继承，在原型上通过一个空对象继承了SuperType的原型上的属性和方法。<br>在JavaScript高级程序设计中认为，寄生组合集成是应用类型最理想的继承范式。</p>
+
+  </section>
+
+  <section class="post-comments">
+
+    <!-- 将评论系统（例如Disqus、多说、友言、畅言等）提供的代码片段粘贴在这里 -->
+    
+</section>
+
+
+</article>
+
+
+            <footer class="footer">
+
+    <span class="footer__copyright">&copy; 2014-2015. | 由<a href="https://hexo.io/">Hexo</a>强力驱动 | 主题<a href="https://github.com/someus/huno">Huno</a></span>
+    
+</footer>
+        </div>
+    </div>
+
+    <!-- js files -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/scale.fix.js"></script>
+    
+
+    
+
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript"> 
+        $(document).ready(function(){
+            MathJax.Hub.Config({ 
+                tex2jax: {inlineMath: [['[latex]','[/latex]'], ['\\(','\\)']]} 
+            });
+        });
+    </script>
+
+
+    
+
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
+    
+    
+    <!--kill ie6 -->
+<!--[if IE 6]>
+  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
+<![endif]-->
+
+</body>
+</html>
