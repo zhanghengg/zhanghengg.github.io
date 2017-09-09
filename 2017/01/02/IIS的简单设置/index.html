@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    
+
+    <title>
+      IIS的简单设置 | 你好，这里是张衡的前端博客 
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+      <meta name="author" content="张衡">
+    
+    
+
+    <meta name="description" content="IIS(Internet Information Service) IIS 是微软自带的服务器，所有windows上都有预装IIS  服务器Server：通常是指服务器硬件。还有服务器软件（程序）服务器软件是运行在电脑上的程序，电脑也可以当做一个服务器 域名(domain name):    www.xxxx.com  ip地址：    命令提示符 –&amp;gt; ipconfig 使用ping ww">
+<meta name="keywords" content="IIS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IIS的简单设置 | 你好，这里是张衡的前端博客">
+<meta property="og:url" content="http://yoursite.com/2017/01/02/IIS的简单设置/index.html">
+<meta property="og:site_name" content="你好，这里是张衡的前端博客">
+<meta property="og:description" content="IIS(Internet Information Service) IIS 是微软自带的服务器，所有windows上都有预装IIS  服务器Server：通常是指服务器硬件。还有服务器软件（程序）服务器软件是运行在电脑上的程序，电脑也可以当做一个服务器 域名(domain name):    www.xxxx.com  ip地址：    命令提示符 –&amp;gt; ipconfig 使用ping ww">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2017-09-09T14:33:38.044Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="IIS的简单设置 | 你好，这里是张衡的前端博客">
+<meta name="twitter:description" content="IIS(Internet Information Service) IIS 是微软自带的服务器，所有windows上都有预装IIS  服务器Server：通常是指服务器硬件。还有服务器软件（程序）服务器软件是运行在电脑上的程序，电脑也可以当做一个服务器 域名(domain name):    www.xxxx.com  ip地址：    命令提示符 –&amp;gt; ipconfig 使用ping ww">
+    
+    
+    
+      <link rel="icon" type="image/x-icon" href="/favicon.png">
+    
+    <link rel="stylesheet" href="/css/uno.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/archive.css">
+    <link rel="stylesheet" href="/css/china-social-icon.css">
+
+</head>
+<body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+
+<header class="panel-cover panel-cover--collapsed">
+
+
+  <div class="panel-main">
+
+  
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        
+
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">你好，这里是张衡的前端博客</a></h1>
+        <hr class="panel-cover__divider" />
+
+        
+        <p class="panel-cover__description">
+          Welcome to zhero&#39;s Blog
+        </p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+        
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+
+              
+                
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">文章</a></li>
+              
+                
+                <li class="navigation__item"><a href="/archive" title="" class="">归档</a></li>
+              
+                
+                <li class="navigation__item"><a href="http://139.199.227.98" title="" class="">主页</a></li>
+              
+
+            </ul>
+          </nav>
+
+          <!-- ----------------------------
+To add a new social icon simply duplicate one of the list items from below
+and change the class in the <i> tag to match the desired social network
+and then add your link to the <a>. Here is a full list of social network
+classes that you can use:
+
+    icon-social-500px
+    icon-social-behance
+    icon-social-delicious
+    icon-social-designer-news
+    icon-social-deviant-art
+    icon-social-digg
+    icon-social-dribbble
+    icon-social-facebook
+    icon-social-flickr
+    icon-social-forrst
+    icon-social-foursquare
+    icon-social-github
+    icon-social-google-plus
+    icon-social-hi5
+    icon-social-instagram
+    icon-social-lastfm
+    icon-social-linkedin
+    icon-social-medium
+    icon-social-myspace
+    icon-social-path
+    icon-social-pinterest
+    icon-social-rdio
+    icon-social-reddit
+    icon-social-skype
+    icon-social-spotify
+    icon-social-stack-overflow
+    icon-social-steam
+    icon-social-stumbleupon
+    icon-social-treehouse
+    icon-social-tumblr
+    icon-social-twitter
+    icon-social-vimeo
+    icon-social-xbox
+    icon-social-yelp
+    icon-social-youtube
+    icon-social-zerply
+    icon-mail
+
+-------------------------------->
+
+<!-- add social info here -->
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner entry">
+            
+
+<article class="post-container post-container--single">
+
+  <header class="post-header">
+    
+    <h1 class="post-title">IIS的简单设置</h1>
+
+    
+
+    <div class="post-meta">
+      <time datetime="2017-01-02" class="post-meta__date date">2017-01-02</time> 
+
+      <span class="post-meta__tags tags">
+
+          
+
+          
+             &#8226; 标签:
+            <font class="tags">
+              <a class="tags-link" href="/tags/IIS/">IIS</a>
+            </font>
+          
+
+      </span>
+    </div>
+    
+    
+
+  </header>
+
+  <section id="post-content" class="article-content post">
+    <h1 id="IIS-Internet-Information-Service"><a href="#IIS-Internet-Information-Service" class="headerlink" title="IIS(Internet Information Service)"></a>IIS(Internet Information Service)</h1><blockquote>
+<p>IIS 是微软自带的服务器，所有windows上都有预装IIS</p>
+</blockquote>
+<p>服务器Server：通常是指服务器硬件。还有服务器软件（程序）<br>服务器软件是运行在电脑上的程序，电脑也可以当做一个服务器</p>
+<p>域名(domain name):  </p>
+<blockquote>
+<p>www.xxxx.com</p>
+</blockquote>
+<p>ip地址：  </p>
+<blockquote>
+<p>命令提示符 –&gt; ipconfig 使用ping www.baidu.com可以把域名转换成ip地址</p>
+</blockquote>
+<p>DNS:  </p>
+<blockquote>
+<p>Domain name system域名解析服务</p>
+</blockquote>
+<h2 id="开启IIS服务器"><a href="#开启IIS服务器" class="headerlink" title="开启IIS服务器"></a>开启IIS服务器</h2><ul>
+<li>1.打开控制面板–&gt;程序–&gt;启用或关闭windows功能–&gt;internet information service–&gt;全部勾选</li>
+<li>2.使用localhost或者127.0.0.1访问本地服务器</li>
+<li>3.默认站点，IIS服务器默认站点在c:\inetpub\wwwroot文件夹下</li>
+<li>4.默认文档，打开服务器的时候加载显示的页面。可以上移提高优先级，也可以添加自己想要显示的页面。</li>
+<li>5.注意浏览器缓存，可能会加载以前缓存的页面，而没有加载自己添加的页面</li>
+<li>6.目录浏览，把服务器下的文件以目录的形式展示，这种方式很不安全，因为会把所有文件暴露出来</li>
+<li>7.开启目录浏览，需要把默认文档关掉或者删除所有的默认文档</li>
+<li>8.如果被人通过ip地址访问你的电脑。需要把防火墙关闭</li>
+<li>9.添加站点，端口需要改，要指定路径，如果不能访问，没有权限，需要修改权限</li>
+<li>10.文件夹–&gt;右键属性–&gt;安全–&gt;编辑–&gt;添加–&gt;everyone–&gt;全部控制–&gt;应用</li>
+<li>11.ftp文件传输协议，上传下载文件</li>
+<li>12.http超文本传输协议</li>
+</ul>
+
+  </section>
+
+  <section class="post-comments">
+
+    <!-- 将评论系统（例如Disqus、多说、友言、畅言等）提供的代码片段粘贴在这里 -->
+    
+</section>
+
+
+</article>
+
+
+            <footer class="footer">
+
+    <span class="footer__copyright">&copy; 2014-2015. | 由<a href="https://hexo.io/">Hexo</a>强力驱动 | 主题<a href="https://github.com/someus/huno">Huno</a></span>
+    
+</footer>
+        </div>
+    </div>
+
+    <!-- js files -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/scale.fix.js"></script>
+    
+
+    
+
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript"> 
+        $(document).ready(function(){
+            MathJax.Hub.Config({ 
+                tex2jax: {inlineMath: [['[latex]','[/latex]'], ['\\(','\\)']]} 
+            });
+        });
+    </script>
+
+
+    
+
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
+    
+    
+    <!--kill ie6 -->
+<!--[if IE 6]>
+  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
+<![endif]-->
+
+</body>
+</html>

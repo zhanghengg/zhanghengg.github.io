@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    
+
+    <title>
+      关于js作用域链的理解 | 你好，这里是张衡的前端博客 
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+      <meta name="author" content="张衡">
+    
+    
+
+    <meta name="description" content="先抛出一个笔试题目123456789101112var a = 100; function fn() &amp;#123;     alert(a);//undefined     var a = 200;     alert(a);//200 &amp;#125; fn(); alert(a);//100 var a; alert(a);//100 var a = 300; alert(a);//300 变量的">
+<meta name="keywords" content="JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于js作用域链的理解 | 你好，这里是张衡的前端博客">
+<meta property="og:url" content="http://yoursite.com/2016/09/17/关于js作用域链的理解/index.html">
+<meta property="og:site_name" content="你好，这里是张衡的前端博客">
+<meta property="og:description" content="先抛出一个笔试题目123456789101112var a = 100; function fn() &amp;#123;     alert(a);//undefined     var a = 200;     alert(a);//200 &amp;#125; fn(); alert(a);//100 var a; alert(a);//100 var a = 300; alert(a);//300 变量的">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2017-09-09T14:34:41.076Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="关于js作用域链的理解 | 你好，这里是张衡的前端博客">
+<meta name="twitter:description" content="先抛出一个笔试题目123456789101112var a = 100; function fn() &amp;#123;     alert(a);//undefined     var a = 200;     alert(a);//200 &amp;#125; fn(); alert(a);//100 var a; alert(a);//100 var a = 300; alert(a);//300 变量的">
+    
+    
+    
+      <link rel="icon" type="image/x-icon" href="/favicon.png">
+    
+    <link rel="stylesheet" href="/css/uno.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/archive.css">
+    <link rel="stylesheet" href="/css/china-social-icon.css">
+
+</head>
+<body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+
+<header class="panel-cover panel-cover--collapsed">
+
+
+  <div class="panel-main">
+
+  
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        
+
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">你好，这里是张衡的前端博客</a></h1>
+        <hr class="panel-cover__divider" />
+
+        
+        <p class="panel-cover__description">
+          Welcome to zhero&#39;s Blog
+        </p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+        
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+
+              
+                
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">文章</a></li>
+              
+                
+                <li class="navigation__item"><a href="/archive" title="" class="">归档</a></li>
+              
+                
+                <li class="navigation__item"><a href="http://139.199.227.98" title="" class="">主页</a></li>
+              
+
+            </ul>
+          </nav>
+
+          <!-- ----------------------------
+To add a new social icon simply duplicate one of the list items from below
+and change the class in the <i> tag to match the desired social network
+and then add your link to the <a>. Here is a full list of social network
+classes that you can use:
+
+    icon-social-500px
+    icon-social-behance
+    icon-social-delicious
+    icon-social-designer-news
+    icon-social-deviant-art
+    icon-social-digg
+    icon-social-dribbble
+    icon-social-facebook
+    icon-social-flickr
+    icon-social-forrst
+    icon-social-foursquare
+    icon-social-github
+    icon-social-google-plus
+    icon-social-hi5
+    icon-social-instagram
+    icon-social-lastfm
+    icon-social-linkedin
+    icon-social-medium
+    icon-social-myspace
+    icon-social-path
+    icon-social-pinterest
+    icon-social-rdio
+    icon-social-reddit
+    icon-social-skype
+    icon-social-spotify
+    icon-social-stack-overflow
+    icon-social-steam
+    icon-social-stumbleupon
+    icon-social-treehouse
+    icon-social-tumblr
+    icon-social-twitter
+    icon-social-vimeo
+    icon-social-xbox
+    icon-social-yelp
+    icon-social-youtube
+    icon-social-zerply
+    icon-mail
+
+-------------------------------->
+
+<!-- add social info here -->
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner entry">
+            
+
+<article class="post-container post-container--single">
+
+  <header class="post-header">
+    
+    <h1 class="post-title">关于js作用域链的理解</h1>
+
+    
+
+    <div class="post-meta">
+      <time datetime="2016-09-17" class="post-meta__date date">2016-09-17</time> 
+
+      <span class="post-meta__tags tags">
+
+          
+
+          
+             &#8226; 标签:
+            <font class="tags">
+              <a class="tags-link" href="/tags/JavaScript/">JavaScript</a>
+            </font>
+          
+
+      </span>
+    </div>
+    
+    
+
+  </header>
+
+  <section id="post-content" class="article-content post">
+    <h1 id="先抛出一个笔试题目"><a href="#先抛出一个笔试题目" class="headerlink" title="先抛出一个笔试题目"></a>先抛出一个笔试题目</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">var a = 100;</div><div class="line"> function fn() &#123;</div><div class="line">     alert(a);//undefined</div><div class="line">     var a = 200;</div><div class="line">     alert(a);//200</div><div class="line"> &#125;</div><div class="line"> fn();</div><div class="line"> alert(a);//100</div><div class="line"> var a;</div><div class="line"> alert(a);//100</div><div class="line"> var a = 300;</div><div class="line"> alert(a);//300</div></pre></td></tr></table></figure>
+<h3 id="变量的提升"><a href="#变量的提升" class="headerlink" title="变量的提升"></a>变量的提升</h3><p>上面的代码实际的执行顺序如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">var a;//全局作用域范围内，此时只是声明，并没有赋值</div><div class="line">a = 100;</div><div class="line">function fn()&#123;</div><div class="line">    var a;</div><div class="line">    alert(a);//undefined</div><div class="line">    a = 200;</div><div class="line">    alert(a);//200</div><div class="line">&#125;</div><div class="line">fn();</div><div class="line">alert(a);//100</div><div class="line">alert(a);//100</div><div class="line">a = 300;</div><div class="line">alert(a);//300</div></pre></td></tr></table></figure>
+<h3 id="函数的提升"><a href="#函数的提升" class="headerlink" title="函数的提升"></a>函数的提升</h3><p>js中创建函数有两种方式：函数声明式和函数字面量式。只有函数声明才存在函数提升！如:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">console.log(f1); // function f1() &#123;&#125;   </div><div class="line">console.log(f2); // undefined  </div><div class="line">function f1() &#123;&#125;</div><div class="line">var f2 = function() &#123;&#125;</div></pre></td></tr></table></figure>
+<p>只所以会有以上的打印结果，是由于js中的函数提升导致代码实际上是按照以下来执行的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">function f1() &#123;&#125; // 函数提升，整个代码块提升到文件的最开始</div><div class="line">console.log(f1);   </div><div class="line">console.log(f2);   </div><div class="line">var f2 = function() &#123;&#125;</div></pre></td></tr></table></figure></p>
+<p>结语：基本上就是这样，要熟练掌握的话可以多做些练习，test:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">console.log(f1); </div><div class="line">console.log(f2);   </div><div class="line">function f1() &#123;console.log(&apos;aa&apos;)&#125;</div><div class="line">var f2 = function() &#123;&#125;</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">(function() &#123;</div><div class="line">　　console.log(a);//undefined</div><div class="line">　　a = &apos;aaa&apos;;</div><div class="line">　　var a = &apos;bbb&apos;;</div><div class="line">　　console.log(a);//bbb</div><div class="line">&#125;)();</div></pre></td></tr></table></figure>
+  </section>
+
+  <section class="post-comments">
+
+    <!-- 将评论系统（例如Disqus、多说、友言、畅言等）提供的代码片段粘贴在这里 -->
+    
+</section>
+
+
+</article>
+
+
+            <footer class="footer">
+
+    <span class="footer__copyright">&copy; 2014-2015. | 由<a href="https://hexo.io/">Hexo</a>强力驱动 | 主题<a href="https://github.com/someus/huno">Huno</a></span>
+    
+</footer>
+        </div>
+    </div>
+
+    <!-- js files -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/scale.fix.js"></script>
+    
+
+    
+
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript"> 
+        $(document).ready(function(){
+            MathJax.Hub.Config({ 
+                tex2jax: {inlineMath: [['[latex]','[/latex]'], ['\\(','\\)']]} 
+            });
+        });
+    </script>
+
+
+    
+
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
+    
+    
+    <!--kill ie6 -->
+<!--[if IE 6]>
+  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
+<![endif]-->
+
+</body>
+</html>

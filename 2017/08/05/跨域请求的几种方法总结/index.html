@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    
+
+    <title>
+      跨域请求的几种方法总结 | 你好，这里是张衡的前端博客 
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+      <meta name="author" content="张衡">
+    
+    
+
+    <meta name="description" content="最近在使用ajax的时候有跨域请求的需求，所以查了一些资料，现在在这里做一下总结，大概有七种方法，不过只有前两三种是比较常用。  什么是跨域 讲到跨域请求的解决方法，首先要先了解什么是跨域，这要从浏览器的同源策略讲起，浏览器设计之初就规定了，出于安全性的考虑，不同源的请求不能互相访问，而不同源进行访问就是跨域。  简单的来说，同源指的是，协议，域名，端口三者相同时就是同源的，可以互相请求。三者只">
+<meta name="keywords" content="Http">
+<meta property="og:type" content="article">
+<meta property="og:title" content="跨域请求的几种方法总结 | 你好，这里是张衡的前端博客">
+<meta property="og:url" content="http://yoursite.com/2017/08/05/跨域请求的几种方法总结/index.html">
+<meta property="og:site_name" content="你好，这里是张衡的前端博客">
+<meta property="og:description" content="最近在使用ajax的时候有跨域请求的需求，所以查了一些资料，现在在这里做一下总结，大概有七种方法，不过只有前两三种是比较常用。  什么是跨域 讲到跨域请求的解决方法，首先要先了解什么是跨域，这要从浏览器的同源策略讲起，浏览器设计之初就规定了，出于安全性的考虑，不同源的请求不能互相访问，而不同源进行访问就是跨域。  简单的来说，同源指的是，协议，域名，端口三者相同时就是同源的，可以互相请求。三者只">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2017-09-09T14:42:35.998Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="跨域请求的几种方法总结 | 你好，这里是张衡的前端博客">
+<meta name="twitter:description" content="最近在使用ajax的时候有跨域请求的需求，所以查了一些资料，现在在这里做一下总结，大概有七种方法，不过只有前两三种是比较常用。  什么是跨域 讲到跨域请求的解决方法，首先要先了解什么是跨域，这要从浏览器的同源策略讲起，浏览器设计之初就规定了，出于安全性的考虑，不同源的请求不能互相访问，而不同源进行访问就是跨域。  简单的来说，同源指的是，协议，域名，端口三者相同时就是同源的，可以互相请求。三者只">
+    
+    
+    
+      <link rel="icon" type="image/x-icon" href="/favicon.png">
+    
+    <link rel="stylesheet" href="/css/uno.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/archive.css">
+    <link rel="stylesheet" href="/css/china-social-icon.css">
+
+</head>
+<body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+
+<header class="panel-cover panel-cover--collapsed">
+
+
+  <div class="panel-main">
+
+  
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        
+
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">你好，这里是张衡的前端博客</a></h1>
+        <hr class="panel-cover__divider" />
+
+        
+        <p class="panel-cover__description">
+          Welcome to zhero&#39;s Blog
+        </p>
+        <hr class="panel-cover__divider panel-cover__divider--secondary" />
+        
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+
+              
+                
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">文章</a></li>
+              
+                
+                <li class="navigation__item"><a href="/archive" title="" class="">归档</a></li>
+              
+                
+                <li class="navigation__item"><a href="http://139.199.227.98" title="" class="">主页</a></li>
+              
+
+            </ul>
+          </nav>
+
+          <!-- ----------------------------
+To add a new social icon simply duplicate one of the list items from below
+and change the class in the <i> tag to match the desired social network
+and then add your link to the <a>. Here is a full list of social network
+classes that you can use:
+
+    icon-social-500px
+    icon-social-behance
+    icon-social-delicious
+    icon-social-designer-news
+    icon-social-deviant-art
+    icon-social-digg
+    icon-social-dribbble
+    icon-social-facebook
+    icon-social-flickr
+    icon-social-forrst
+    icon-social-foursquare
+    icon-social-github
+    icon-social-google-plus
+    icon-social-hi5
+    icon-social-instagram
+    icon-social-lastfm
+    icon-social-linkedin
+    icon-social-medium
+    icon-social-myspace
+    icon-social-path
+    icon-social-pinterest
+    icon-social-rdio
+    icon-social-reddit
+    icon-social-skype
+    icon-social-spotify
+    icon-social-stack-overflow
+    icon-social-steam
+    icon-social-stumbleupon
+    icon-social-treehouse
+    icon-social-tumblr
+    icon-social-twitter
+    icon-social-vimeo
+    icon-social-xbox
+    icon-social-yelp
+    icon-social-youtube
+    icon-social-zerply
+    icon-mail
+
+-------------------------------->
+
+<!-- add social info here -->
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner entry">
+            
+
+<article class="post-container post-container--single">
+
+  <header class="post-header">
+    
+    <h1 class="post-title">跨域请求的几种方法总结</h1>
+
+    
+
+    <div class="post-meta">
+      <time datetime="2017-08-05" class="post-meta__date date">2017-08-05</time> 
+
+      <span class="post-meta__tags tags">
+
+          
+
+          
+             &#8226; 标签:
+            <font class="tags">
+              <a class="tags-link" href="/tags/Http/">Http</a>
+            </font>
+          
+
+      </span>
+    </div>
+    
+    
+
+  </header>
+
+  <section id="post-content" class="article-content post">
+    <blockquote>
+<p>最近在使用ajax的时候有跨域请求的需求，所以查了一些资料，现在在这里做一下总结，大概有七种方法，不过只有前两三种是比较常用。</p>
+</blockquote>
+<h2 id="什么是跨域"><a href="#什么是跨域" class="headerlink" title="什么是跨域"></a>什么是跨域</h2><blockquote>
+<p>讲到跨域请求的解决方法，首先要先了解什么是跨域，这要从浏览器的同源策略讲起，浏览器设计之初就规定了，出于安全性的考虑，不同源的请求不能互相访问，而不同源进行访问就是跨域。</p>
+</blockquote>
+<p>简单的来说，同源指的是，协议，域名，端口三者相同时就是同源的，可以互相请求。三者只要有一者及以上不同，就是不同源的，默认情况下是不能够互相访问的。</p>
+<h2 id="如何跨域"><a href="#如何跨域" class="headerlink" title="如何跨域"></a>如何跨域</h2><blockquote>
+<p>虽然说浏览器为了安全性，不允许跨域访问，但是开发的时候有各种各样的需求，有时候就是需要跨域进行访问，这就有了各种解决跨域请求问题的各种方法。</p>
+</blockquote>
+<h3 id="1-CORS-跨域资源共享"><a href="#1-CORS-跨域资源共享" class="headerlink" title="1.CORS(跨域资源共享)"></a>1.CORS(跨域资源共享)</h3><blockquote>
+<p>优点：1.支持get和post等多种请求方法.<br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;2. 使用简单，更为安全.<br>缺点：1.一些老版本的浏览器不支持，兼容性不够好.</p>
+</blockquote>
+<p>CORS 是一个 W3C 标准，全称是”跨域资源共享”（Cross-origin resource sharing）它允许浏览器向跨源服务器，发出 XMLHttpRequest 请求。<br>CORS 需要浏览器和服务器同时支持才可以生效，对于开发者来说，CORS 通信与同源的 ajax 通信没有差别，代码完全一样。浏览器一旦发现 ajax 请求跨源，就会自动添加一些附加的头信息，有时还会多出一次附加的请求。</p>
+<p>当发出跨域请求的时候，浏览器会在请求头添加一个Origin字段，该字段的值是发出这个请求的源（协议+域名+端口号），服务器根据Origin字段的值来判断是允许该请求访问。所以关键在于服务器的设置。</p>
+<p>当服务器接收到其他源的http请求的时候，会拿到请求头的Origin字段的值跟自己响应头中的Access-Control-Allow-Origin字段进行比较，如果Access-Control-Allow-Origin中存在该源，那么服务器就会允许这个请求进行访问。所以要允许该源访问就应该在响应中设置Access-Control-Allow-Origin为该请求源的值，或者设置为*表示允许任意的源进行访问。</p>
+<p>CORS还分为简单请求与非简单请求（大多数场景下我们使用的都是简单请求），以及在响应头中还有一些附加的设置字段，想要详细了解可以参考<br><a href="http://www.ruanyifeng.com/blog/2016/04/cors.html" target="_blank" rel="external">跨域资源共享详解–阮一峰</a></p>
+<h3 id="2-JSONP-JSON-with-Padding"><a href="#2-JSONP-JSON-with-Padding" class="headerlink" title="2.JSONP(JSON with Padding)"></a>2.JSONP(JSON with Padding)</h3><blockquote>
+<p>优点：老版本的浏览器支持，兼容性比较好.<br>缺点：只支持get方法，使用没有CORS方便.</p>
+</blockquote>
+<p>在html页面上加载js脚本不受同源策略的影响，所以我们可以利用这一特性，使用script标签实现跨域资源的请求。在页面中动态插入script，script标签的src属性就是后端api接口的地址，并且以get的方式将前端回调处理函数名称告诉后端，后端在响应请求时会将回调返还，并且将数据以参数的形式传递回来。</p>
+<p> 前端<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">//http://127.0.0.1:8888/jsonp.html  </div><div class="line"></div><div class="line">var script = document.createElement(&apos;script&apos;);  </div><div class="line">script.src=&apos;http://127.0.0.1:2333/jsonpHandler?callback=_callback&apos;  </div><div class="line">document.body.appendChild(script);  </div><div class="line">//插入script标签 </div><div class="line">//回调处理函数_callback </div><div class="line">var _callback = function(obj)&#123;  </div><div class="line">    for(key in obj)&#123; console.log(&apos;key: &apos; + key +&apos; value: &apos; + obj[key]); &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<p> 服务器<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">//http://127.0.0.1:2333/jsonpHandler</div><div class="line">app.get(&apos;/jsonpHandler&apos;, (req,res) =&gt; &#123; </div><div class="line">    let callback = req.query.callback; </div><div class="line">    let obj = &#123; type : &apos;jsonp&apos;, name : &apos;weapon-x&apos; &#125;; </div><div class="line">    res.writeHead(200, &#123;&quot;Content-Type&quot;:&quot;text/javascript&quot;&#125;);</div><div class="line">    res.end(callback + &apos;(&apos; + JSON.stringify(obj) + &apos;)&apos;); &#125;)</div></pre></td></tr></table></figure></p>
+<h2 id="3-服务器代理"><a href="#3-服务器代理" class="headerlink" title="3.服务器代理"></a>3.服务器代理</h2><blockquote>
+<p>浏览器受到同源策略的限制，而服务器却不受限制，所以我们可以通过先向本地服务器发送请求，本地服务器再向不同源的服务器api发送请求，最后再把响应返回给浏览器，通过服务器中转代理的方式实现跨域请求。</p>
+</blockquote>
+<p> 前端：<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">//http://127.0.0.1:8888/server</div><div class="line">var xhr = new XMLHttpRequest();</div><div class="line">xhr.onload = function(data)&#123;</div><div class="line">    var _data = JSON.parse(data.target.responseText) for(key in _data)&#123; console.log(&apos;key: &apos; + key +&apos; value: &apos; + _data[key]); &#125; &#125;;</div><div class="line">    xhr.open(&apos;POST&apos;,&apos;http://127.0.0.1:8888/feXhr&apos;,true); //向本地服务器发送请求</div><div class="line">    xhr.setRequestHeader(&apos;Content-Type&apos;,&apos;application/x-www-form-urlencoded&apos;); xhr.send(&quot;url=http://127.0.0.1:2333/beXhr&quot;); //以参数形式告知需要请求的后端接口</div></pre></td></tr></table></figure></p>
+<p>服务器：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">//http://127.0.0.1:8888/feXhr</div><div class="line">app.post(&apos;/feXhr&apos;,(req,res) =&gt; &#123;</div><div class="line">    let url = req.body.url; superagent.get(url) .end(function (err,docs) &#123;</div><div class="line">        if(err)&#123; console.log(err);</div><div class="line">        return &#125;</div><div class="line">        res.end(docs.res.text); //返回到前端 &#125;) &#125;)</div><div class="line">        //http://127.0.0.1:2333/beXhr</div><div class="line">        app.get(&apos;/beXhr&apos;,(req,res) =&gt; &#123;</div><div class="line">            let obj = &#123; type : &apos;superagent&apos;, name : &apos;weapon-x&apos; &#125;;</div><div class="line">            res.writeHead(200, &#123;&quot;Content-Type&quot;: &quot;text/javascript&quot;&#125;);</div><div class="line">            res.end(JSON.stringify(obj)); //响应 &#125;)</div></pre></td></tr></table></figure></p>
+<h2 id="4-postMessage"><a href="#4-postMessage" class="headerlink" title="4.postMessage"></a>4.postMessage</h2><p>postMessage 是 HTML5 新增加的一项功能，跨文档消息传输(Cross Document Messaging)，目前：Chrome 2.0+、Internet Explorer 8.0+, Firefox 3.0+, Opera 9.6+, 和 Safari 4.0+ 都支持这项功能.该方法可以通过绑定window的message事件来监听发送跨文档消息传输内容。使用postMessage实现跨域的话原理就类似于jsonp，动态插入iframe标签，再从iframe里面拿回数据.</p>
+<h2 id="5-location-hash"><a href="#5-location-hash" class="headerlink" title="5.location.hash"></a>5.location.hash</h2><p>在url中xxx.com#hash,#后面的就是hash值，改变hash值页面不会刷新，可以利用这一特性以及iframe来完成跨域传递数据。在一个域的页面创建一个隐藏的iframe，iframe的src指向另一个域的页面，此时src指向的页面就可以通过src中的hash值来获取传递的数据，然后在iframe指向的这个页面中再创建一个iframe，src指向第一个域的代理页面，通过这个页面来修改parent.loacation.hash的值来达到数据回传的目的。</p>
+<h2 id="6-window-name"><a href="#6-window-name" class="headerlink" title="6.window.name"></a>6.window.name</h2><p>window.name 不是一个普通的全局变量，而是当前窗口的名字，也就是说，不论页面怎么跳转，window.name都不会改变，所以可以通过在当前页设置window.name然后跳转到另一个页面获取window.name的值来达到跨域数据传递的目的。</p>
+<h2 id="7-document-domain"><a href="#7-document-domain" class="headerlink" title="7.document.domain"></a>7.document.domain</h2><p>对于相同主域不同子域的页面来说，可以通过修改document.domain的方法来变成同源，从而符合浏览器的同源策略，达到数据传递的目的。<br>需要注意的是：</p>
+<ol>
+<li>这两个域名必须属于同一个基础域名!而且所用的协议，端口都要一致，否则无法利用。  </li>
+<li>document.domain只能赋成当前的域名或者基础域名。 </li>
+<li>如果页面修改了document.domain，则它包含的iframe，必须也设domain，才能进行交互。就算是同域的页面也必须要设。</li>
+</ol>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>一般情况下，常用的跨域方法是CORS因为比较方便好用。在考虑低版本浏览器的兼容问题时候可以使用jsonp，但要注意jsonp只支持get方法。</p>
+
+  </section>
+
+  <section class="post-comments">
+
+    <!-- 将评论系统（例如Disqus、多说、友言、畅言等）提供的代码片段粘贴在这里 -->
+    
+</section>
+
+
+</article>
+
+
+            <footer class="footer">
+
+    <span class="footer__copyright">&copy; 2014-2015. | 由<a href="https://hexo.io/">Hexo</a>强力驱动 | 主题<a href="https://github.com/someus/huno">Huno</a></span>
+    
+</footer>
+        </div>
+    </div>
+
+    <!-- js files -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/scale.fix.js"></script>
+    
+
+    
+
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript"> 
+        $(document).ready(function(){
+            MathJax.Hub.Config({ 
+                tex2jax: {inlineMath: [['[latex]','[/latex]'], ['\\(','\\)']]} 
+            });
+        });
+    </script>
+
+
+    
+
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
+    
+    
+    <!--kill ie6 -->
+<!--[if IE 6]>
+  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
+<![endif]-->
+
+</body>
+</html>
